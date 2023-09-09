@@ -8,7 +8,7 @@ import './App.styled';
 import {SectionStyle, TitleStyle, TitleContactsStyle, ContactListStyle} from './App.styled'
 import { nanoid } from 'nanoid';
 
-export const App = () => {
+const App = () => {
   
   const [contacts, setContacts]=useState([]);
   const [filter, setFilter]=useState('');
@@ -18,13 +18,10 @@ export const App = () => {
   useEffect(() => {
     const savedFilter=JSON.parse(localStorage.getItem("contacts"));
     if (savedFilter){
-      
-      setContacts(
-        savedFilter
-    )}}, []);
+      setContacts(savedFilter)
+    }}, []);
 
-
-    useEffect(()=> {
+  useEffect(()=> {
       localStorage.setItem("contacts", JSON.stringify(contacts))
     }, [contacts])
   
@@ -48,8 +45,7 @@ const  addContact = newContact => {
     id: nanoid()
   };
   
-  setContacts(prevContacts => 
-  [...prevContacts, newContactData]);
+  setContacts(prevContacts =>[...prevContacts, newContactData]);
 };
 
 
@@ -60,13 +56,10 @@ const deleteContact =( contactId )=> {
 };
 
 
-const changeContact= (newContact) => {
-setFilter(newContact)
-    };
+const changeContact= (newContact) => {setFilter(newContact)};
 
 const  resetFilter=()=>{
-  setFilter('')
-    };
+  setFilter('')};
 
     const filteredContacts = contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
@@ -98,4 +91,4 @@ const  resetFilter=()=>{
 
 }
 
-// export default App;
+export default App;
