@@ -10,21 +10,17 @@ import { nanoid } from 'nanoid';
 
 const App = () => {
   
-  const [contacts, setContacts]=useState([]);
+  const [contacts, setContacts] = useState(() => JSON.parse(localStorage.getItem("contacts")) ?? []);
+
   const [filter, setFilter]=useState('');
 
 
-  
-  useEffect(() => {
-    const savedFilter=JSON.parse(localStorage.getItem("contacts"));
-    if (savedFilter){
-      setContacts(savedFilter)
-    }}, []);
 
   useEffect(()=> {
       localStorage.setItem("contacts", JSON.stringify(contacts))
     }, [contacts])
   
+    
 
 
 const  addContact = newContact => {
@@ -87,8 +83,6 @@ const  resetFilter=()=>{
 
         <GlobalStyle/>
       </SectionStyle>
-    );
-
-}
+    )}
 
 export default App;
